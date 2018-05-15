@@ -1,0 +1,581 @@
+<div class="row">
+    <div class="col-sm-12" data-spy="scroll" data-offset="0">                            
+        <div class="panel panel-default">            
+            <!-- main content -->
+            <div class="panel-heading">
+                <div class="row">
+                    <div  class="col-lg-12 panel-title">
+                        <h3 class="col-lg-4 col-md-4 col-sm-4">Resource Detail</h3>
+                        <div class="pull-right">                               
+                            <span><?php echo btn_edit('admin/resource/add_resource/' . $resource_info->resource_id); ?></span>
+                            <span><?php echo btn_pdf('admin/resource/make_pdf/' . $resource_info->resource_id); ?></span>
+                            <button class="margin btn-print" type="button" data-toggle="tooltip" title="Print" onclick="printDiv('printableArea')"><?php echo btn_print(); ?></button>                                                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div id="printableArea"> 
+                <div class="show_print" style="width: 100%; border-bottom: 2px solid black;">
+                    <table style="width: 100%; vertical-align: middle;">
+                        <tr>
+                            <?php
+                            $genaral_info = $this->session->userdata('genaral_info');
+                            if (!empty($genaral_info)) {
+                                foreach ($genaral_info as $info) {
+                                    ?>
+                                    <td style="width: 75px; border: 0px;">
+                                        <img style="width: 50px;height: 50px" src="<?php echo base_url() . $info->logo ?>" alt="" class="img-circle"/>
+                                    </td>
+                                    <td style="border: 0px;">
+                                        <p style="margin-left: 10px; font: 14px lighter;"><?php echo $info->name ?></p>
+                                    </td>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <td style="width: 75px; border: 0px;">
+                                    <img style="width: 50px;height: 50px" src="<?php echo base_url() ?>img/logo.png" alt="Logo" class="img-circle"/>
+                                </td>
+                                <td style="border: 0px;">
+                                    <p style="margin-left: 10px; font: 14px lighter;">Human Resource Management System</p>
+                                </td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                </div><!--            show when print start-->
+                <br/>
+                <div class="col-lg-12 well">
+                    <div class="row">                            
+                        <div class="col-lg-2 col-sm-2">
+                            <div class="fileinput-new thumbnail" style="width: 144px; height: 158px; margin-top: 14px; margin-left: 16px; background-color: #EBEBEB;">
+                                <?php if ($resource_info->photo): ?>
+                                    <img src="<?php echo base_url() . $resource_info->photo; ?>" style="width: 142px; height: 148px; border-radius: 3px;" >  
+                                <?php else: ?>
+                                    <img src="<?php echo base_url() ?>/img/user.png" alt="resource_Image">
+                                <?php endif; ?>         
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-sm-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-lg-8 col-sm-8 ">
+                            <div>
+                                <div style="margin-left: 20px;">                                        
+                                    <h3><?php echo "$resource_info->first_name " . "$resource_info->last_name"; ?></h3>
+                                    <hr />
+                                    <table class="table-hover">
+                                        <tr>
+                                            <td><strong>Resource ID</strong></td>
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                            <td><?php echo $resource_info->resourcement_id ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Department</strong></td>
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                            <td><?php echo "$resource_info->department_name"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Designation</strong></td>
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                            <td><?php echo "$resource_info->designations"; ?></td>
+                                        </tr>                                                                                
+                                        <tr>
+                                            <td><strong>Joining Date</strong></td>
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                            <td><?php echo date('d M Y', strtotime($resource_info->joining_date)); ?></td>
+                                        </tr>                                           
+                                    </table>                                                                           
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- ************************ Personal Information Panel Start ************************-->
+                    <div class="col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Personal Details</h4>
+                            </div>
+                            <div class="panel-body form-horizontal">                                
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Date of Birth: </label>
+                                    <div class="col-sm-8">
+                                        <p class="form-control-static"><?php echo date('d M Y', strtotime($resource_info->date_of_birth)); ?></p>                                                                                          
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Gender:</label>
+                                    <div class="col-sm-8">
+                                        <p class="form-control-static"><?php echo "$resource_info->gender"; ?></p>                                                                                          
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Maratial Status:</label>
+                                    <div class="col-sm-8">
+                                        <p class="form-control-static"><?php echo "$resource_info->maratial_status"; ?></p>                                                                                          
+                                    </div>
+                                </div>
+                                <?php if (!empty($resource_info->nationality)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Nationality : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->nationality"; ?></p>                                                                                          
+                                        </div>
+                                    </div>                                
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->passport_number)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Identity Card: </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->passport_number"; ?></p>                                                                                          
+                                        </div>
+                                    </div>                                
+                                <?php endif; ?>                                
+                            </div>            
+                        </div>            
+                    </div> <!-- ************************ Personal Information Panel End ************************-->       
+                    <div class="col-sm-6"><!-- ************************ Contact Details Start******************************* -->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4 class="panel-title">Contact Details</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">
+                                <?php if (!empty($resource_info->email)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Email : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->email"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->phone)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Phone : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->phone"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->mobile)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Mobile : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->mobile"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->address)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Address : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->address"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->present_address)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Present Address : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->present_address"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->city)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">City : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->city"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->country_id)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Country : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->countryName"; ?></p>                                                                                          
+                                        </div>
+                                    </div> 
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div> <!-- ************************ Contact Details End ******************************* -->
+
+
+
+                    <!-- ************************ Experience Details Start******************************* -->
+                    <div class="col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4 class="panel-title">Experience Information</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">                                
+                                <?php if (!empty($resource_info->company_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" > Company :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->company_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->position)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" >Position :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->position"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->job_desk)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Job Desk : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->job_desk"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->duration)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Duration : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->duration"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->salary)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Salary : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->salary"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->reason)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Reason Out Of Work : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->reason"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                
+                            </div>
+                        </div>
+                    </div><!-- ************************ Experience Details End ******************************* -->
+
+
+
+                    <!-- ************************      Education Details Start******************************* -->
+                    <div class="col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4 class="panel-title">Education Information</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">                                
+                                <?php if (!empty($resource_info->elementary_school)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" > Elementary School :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->elementary_school"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->junior_high_school)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" >Junior High School :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->junior_high_school"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->high_school)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">High School : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->high_school"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->diplome)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Diplome : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->diplome"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->university)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">University : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->university"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                
+                            </div>
+                        </div>
+                    </div><!-- ************************ Education Details End ******************************* -->
+
+                    <!-- ************************      Family Details Start******************************* -->
+                    <div class="col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4 class="panel-title">Family Information</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">                                
+                                <?php if (!empty($resource_info->spouse_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" > Spouse :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->spouse_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->child_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" >Child :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->child_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->child2_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Child 2 : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->child2_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Father's Name: </label>
+                                    <div class="col-sm-8">
+                                        <p class="form-control-static"><?php echo "$resource_info->father_name"; ?></p>                                                                                          
+                                    </div>
+                                </div>                                
+                                <?php if (!empty($resource_info->mother_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Mother : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->mother_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->own_brosis_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Own Bro/Sis : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->own_brosis_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->own_brosis_name1)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Own Bro/Sis 2 : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->own_brosis_name1"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->current_address)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Current Add : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->current_address"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                
+                            </div>
+                        </div>
+                    </div><!-- ************************ Family Details End ******************************* --> 
+
+
+
+                   <!-- ************************      Bank Details Start******************************* -->
+                    <div class="col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4 class="panel-title">Bank Information</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">                                
+                                <?php if (!empty($resource_info->bank_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" > Bank Name :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->bank_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->branch_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" >Branch Name :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->branch_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->account_name)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Account Name : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->account_name"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->account_number)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Account Number : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->account_number"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div><!-- ************************ Bank Details End ******************************* -->
+
+
+
+                    <!-- ************************ Skill Details Start******************************* -->
+                    <div class="col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4 class="panel-title">Skill Information</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">                                
+                                <?php if (!empty($resource_info->technical)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" > Technical :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->technical"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->computer)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" >Computer :</label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->computer"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                
+                                <?php if (!empty($resource_info->english)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">English Language : </label>
+                                        <div class="col-sm-8">
+                                            <p class="form-control-static"><?php echo "$resource_info->english"; ?></p>                                                                                          
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                
+                            </div>
+                        </div>
+                    </div><!-- ************************ Skill Details End ******************************* -->
+
+                    <div class="col-sm-6 hidden-print"><!-- ******* resource Documents Start ***************** -->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4 class="panel-title">Resource Documents</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">
+                                <!-- CV Upload -->                                                                  
+                                <?php if (!empty($resource_info->resume)): ?>                                                
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Resume : </label>
+                                        <div class="col-sm-8">                                                        
+                                            <p class="form-control-static">
+                                                <a href="<?php echo base_url() . $resource_info->resume; ?>" target="_blank" style="text-decoration: underline;">View resource Resume</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->offer_letter)): ?>                                                
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Offer Letter : </label>
+                                        <div class="col-sm-8">                                                        
+                                            <p class="form-control-static">
+                                                <a href="<?php echo base_url() . $resource_info->offer_letter; ?>" target="_blank" style="text-decoration: underline;">View Offer Latter</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->joining_letter)): ?>                                                
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Joining Letter : </label>
+                                        <div class="col-sm-8">                                                        
+                                            <p class="form-control-static">
+                                                <a href="<?php echo base_url() . $resource_info->joining_letter; ?>" target="_blank" style="text-decoration: underline;">View Joining Letter</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->contract_paper)): ?>                                                
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Contract Paper : </label>
+                                        <div class="col-sm-8">                                                        
+                                            <p class="form-control-static">
+                                                <a href="<?php echo base_url() . $resource_info->contract_paper; ?>" target="_blank" style="text-decoration: underline;">View Contract Paper</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->id_proff)): ?>                                                
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">ID Proff : </label>
+                                        <div class="col-sm-8">                                                        
+                                            <p class="form-control-static">
+                                                <a href="<?php echo base_url() . $resource_info->id_proff; ?>" target="_blank" style="text-decoration: underline;">View ID Proff</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (!empty($resource_info->other_document)): ?>                                                
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Other Document : </label>
+                                        <div class="col-sm-8">                                                        
+                                            <p class="form-control-static">
+                                                <a href="<?php echo base_url() . $resource_info->other_document; ?>" target="_blank" style="text-decoration: underline;">View Other Document</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>                                                            
+                            </div>
+                        </div>
+                    </div> <!-- ************************ resource Documents Start ******************************* -->                            
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function printDiv(printableArea) {
+        var printContents = document.getElementById(printableArea).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
