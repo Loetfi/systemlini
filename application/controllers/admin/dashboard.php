@@ -94,7 +94,7 @@ class Dashboard extends Admin_Controller {
         }
 
         // get all expense list by year and month
-        $data['all_expense'] = $this->get_expense_list($data['year']);
+        $data['all_expense'] = array(); //$this->get_expense_list($data['year']);
 
         $data['subview'] = $this->load->view('admin/main_content', $data, TRUE);
         $this->load->view('admin/_layout_main', $data);

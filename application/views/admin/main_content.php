@@ -248,48 +248,7 @@
                 </div>
             </div>                    
             <div class="col-md-5 wrap-fpanel">
-                <div class="panel panel-default">
-                    <div class="panel-heading with-border">
-                        <h3 class="panel-title">Expense Report</h3>                       
-                    </div><!-- /.box-header -->
-                    <!--Monthly Recap Report And Latest Order  -->
-                    <div class="panel-body">
-                        <div class="row">
-                            <!-- Monthly Recap Report-->
-                            <div class="col-md-12">
-                                <!-- Start select input year -->
-                                <p class="text-center">
-                                <form role="form" id="form" action="<?php echo base_url(); ?>admin/dashboard" method="post" class="form-horizontal form-groups-bordered">
-                                    <div class="form-group">
-                                        <label  class="col-sm-3 control-label">Select Year<span class="required">*</span></label>                                        
-                                        <div class="col-sm-5"> 
-                                            <div class="input-group">
-                                                <input type="text" name="year" value="<?php
-                                                if (!empty($year)) {
-                                                    echo $year;
-                                                }
-                                                ?>" class="form-control years"><span class="input-group-addon"><a href="#"><i class="glyphicon glyphicon-calendar"></i></a></span>
-                                            </div>
-                                        </div>
-                                        <button type="submit" data-toggle="tooltip" data-placement="top" title="Search" class="btn btn-custom"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </form>
-                                </p>
-                                <!-- End select input year -->
-                                <div class="chart-responsive">
-                                    <!-- Sales Chart Canvas -->
-                                    <canvas id="buyers" class="col-sm-12"></canvas>
-                                </div><!-- /.chart-responsive -->
-                            </div><!-- /.col -->
-                            <!-- / Monthly Recap Report -->                            
-                        </div><!-- /.row -->
-                    </div><!-- ./box-body -->
-                    <!--End Monthly Recap Report And Latest Order  -->
-
-
-                    <!-- / Monthly Recap Report And Latest Order and Total Revenue,Cost,Profit,Tax -->
-
-                </div>
+                
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
